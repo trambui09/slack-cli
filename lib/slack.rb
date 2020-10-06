@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require_relative 'workspace'
 
 def main
   puts "Welcome to the Ada Slack CLI!"
@@ -10,3 +11,5 @@ def main
 end
 
 main if __FILE__ == $PROGRAM_NAME
+
+
