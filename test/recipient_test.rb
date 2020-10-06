@@ -1,6 +1,8 @@
 require_relative 'test_helper'
 
 # how do we pull from the API?
+#KEY = (how to call on the key hidden in .env?)
+#URL = ""
 
 describe 'Recipient' do
   before do

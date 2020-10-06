@@ -24,7 +24,7 @@ def main
 
   # print the name of each channel
   puts "here's the name for each channel:"
-  #pp response
+  pp response
   # response['channels'].each do |channel|
   #   p channel["name"]
   # end
