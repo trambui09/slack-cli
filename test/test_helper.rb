@@ -8,6 +8,11 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/skip_dsl'
 require 'vcr'
+require 'dotenv'
+#require 'webmock/minitest'
+Dotenv.load
+
+# require_relative '../lib/location_search'
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
