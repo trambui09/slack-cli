@@ -9,21 +9,13 @@ class Workspace
     @channels = Channel.list_all
   end
 
+  # is is possible for two users to have the same username?
   def select_user(id)
-    # if @users.slack_id.nil? || @users.name.nil?
-    #   # raise error
-    # end
     user_array = @users.find do |user|
-       user.slack_id == id
+      user.slack_id == id || user.name == id
     end
+    return user_array
 
-    unless user_array
-      raise ArgumentError.new 'user not found'
-    end
-
-
-    selected_user = @users.select { |user| user == id}
-    return selected_user
   end
 
   def select_channel(id)
