@@ -1,12 +1,12 @@
 require_relative 'test_helper'
+require_relative '../lib/recipient'
+# if we use a module, we will have access to everything want - won't
+# need to import/require-relative for each file
 
-# how do we pull from the API?
-#KEY = (how to call on the key hidden in .env?)
-#URL = ""
 
 describe 'Recipient' do
   before do
-    # @recipient = create instance of receipient for tests
+    @recipient = Recipient.new("987654321", "test person")
   end
 
   describe 'constructor' do
@@ -15,23 +15,21 @@ describe 'Recipient' do
     end
 
     it 'check attribute data types' do
-      expect(@recipient.name).must_be_kind_of #data type
-      expect(@recipient.slack_id).must_be_kind_of #data type
+      expect(@recipient.name).must_be_kind_of String
+      expect(@recipient.slack_id).must_be_kind_of String
     end
 
   end
 
   describe 'list_all' do
-    it 'raises an error if invoked directly (without subclassing' do
-      expect {
+    it 'raises an error if invoked directly (without subclassing)' do
+      expect do
         Recipient.list_all
-      }.must_raise NotImplementedError
+      end.must_raise NotImplementedError
 
     end
 
-    # it '' do
-    #
-    # end
+
   end
 
 end
