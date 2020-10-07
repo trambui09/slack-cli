@@ -6,15 +6,9 @@ require 'httparty'
 
 Dotenv.load
 
-
 class User < Recipient
-  USER_LIST_URL = 'https://slack.com/api/users.list'
-
-
 
   attr_reader :real_name, :status_text, :status_emoji
-
-  # don't know if this is how we truly initialize this constructor
 
   def initialize(slack_id:, name:, real_name:, status_text:, status_emoji:)
     super(slack_id, name)

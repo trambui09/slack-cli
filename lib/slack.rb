@@ -12,7 +12,7 @@ require_relative 'recipient'
 Dotenv.load
 
 def main
-  puts "Welcome to the Ada Slack CLI!"
+  puts "\nWelcome to the Ada Slack CLI!"
   workspace = Workspace.new
 
   # TODO project
@@ -27,8 +27,15 @@ def main
   # list channel == workspace.channels.list_all
   # Q : where should API query go? Part of Recipient?
 
-  response = HTTParty.get('https://slack.com/api/conversations.list', query: {token: ENV['SLACK_TOKEN']})
-  user_response = HTTParty.get('https://slack.com/api/users.list', query: {token: ENV['SLACK_TOKEN']})
+  response = HTTParty.get(
+    'https://slack.com/api/conversations.list',
+    query: { token: ENV['SLACK_TOKEN'] }
+  )
+
+  user_response = HTTParty.get(
+    'https://slack.com/api/users.list',
+    query: { token: ENV['SLACK_TOKEN'] }
+  )
 
   # print the name of each channel
   # puts "here's the name for each channel:"
@@ -45,24 +52,37 @@ def main
   #
 
   # CLI loop control
+  puts 'Please select one of the following menu-options by typing the'
+  puts 'number or term (e.g., type "1" or "list-user" for option 1).'
+  puts '_______________________________________________________________'
+  puts '0. menu-options'
+  puts '1. list-user'
+  puts '2. list-channel'
+  puts '3. quit'
+  puts '_______________________________________________________________'
+
+  valid = %w[list-user list-channel quit menu-options 0 1 2 3] + (0..3).to_a
+  choice = gets.chomp.downcase
   loop do
-    puts "What would you like to do? Type in 'list-user', 'list-channel', or 'quit' to quit"
-    choice = gets.chomp.downcase
-    until %w[list-user list-channel quit].include?(choice)
-      puts "invalid choice, pick again"
-      choice = gets.chomp.downcase
-    end
-    if choice == 'list-user'
+    puts 'invalid choice, pick again' unless valid.include?(choice)
+    case choice
+    when 0, '0', 'menu-options'
+      puts '1. list-user'
+      puts '2. list-channel'
+      puts '3. quit'
+    when 1, '1', 'list-user'
       tp workspace.users,:name, :slack_id, :real_name
-    elsif choice == 'list-channel'
+    when 2, '2', 'list-channel'
       tp workspace.channels, :slack_id, :name, :topic, :member_count
-    elsif choice == 'quit'
+    when 3, '3', 'quit'
       break
     end
+    puts 'What would you like to do next?'
+    choice = gets.chomp.downcase
 
   end
 
-  puts "Thank you for using the Ada Slack CLI"
+  puts 'Thank you for using the Ada Slack CLI'
 end
 
 # def valid_choice?(choice)

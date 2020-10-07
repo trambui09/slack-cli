@@ -2,12 +2,14 @@ require_relative 'test_helper'
 require_relative '../lib/user'
 require_relative '../lib/recipient'
 
+# From readme: Any tests involving a `User` should use the username `SlackBot`
+#https://api.slack.com/methods/users.list
 describe 'User' do
   describe 'create instance of User for tests' do
     before do
       @channel = User.new(
         slack_id: '987654321',
-        name: 'Ada Bot',
+        name: 'SlackBot',
         real_name: 'Ada Lovelace',
         status_text: 'working',
         status_emoji: ':confused-dog:'
@@ -29,7 +31,8 @@ describe 'User' do
 
     end
   end
-  
+
+
   describe 'get' do
 
     it 'lists users' do
@@ -46,20 +49,20 @@ describe 'User' do
       end
     end
 
-    #TODO: this test is not working:
+
     it 'error when API call fails' do
 
-      VCR.use_cassette('users-list') do
-        expect{
+      VCR.use_cassette('API-fail') do
+        expect {
           User.get(
           'https://slack.com/api/users.no_one_lives_here',
           query: { token: ENV['SLACK_TOKEN'] }
-          )
-        }.must_raise SlackApiError
-       
+        )
+        }.must_raise SlackAPIError
+
       end
     end
 
-  end 
-  
+  end
+
 end

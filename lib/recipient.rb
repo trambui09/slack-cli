@@ -2,9 +2,13 @@ require 'dotenv'
 require 'httparty'
 
 Dotenv.load
-class SlackApiError < Exception; end
+class SlackAPIError < Exception; end
 #Module?
 class Recipient
+
+  USER_LIST_URL = 'https://slack.com/api/users.list'
+  CHANNEL_LIST_URL = 'https://slack.com/api/conversations.list'
+
   attr_reader :slack_id, :name
 
   def initialize(slack_id, name)
@@ -16,10 +20,9 @@ class Recipient
   end
 
   def self.get(url, params)
-    #TODO: change variable name so it's not response.response
     response = HTTParty.get(url, params)
-    if response.response.code == '404'
-      raise SlackApiError, "API call failed with code #{response['error']}"
+    unless response['ok'] == true
+      raise SlackAPIError, "API call failed with code #{response.response.code}"
     end
 
     return response

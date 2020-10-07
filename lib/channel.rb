@@ -2,7 +2,6 @@
 require_relative 'recipient'
 
 class Channel < Recipient
-  CHANNEL_LIST_URL = 'https://slack.com/api/conversations.list'
   attr_reader :topic, :member_count
 
   def initialize(slack_id:, name:, topic:, member_count:)
