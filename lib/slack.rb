@@ -87,6 +87,9 @@ def main
       id = gets.chomp
       p workspace.select_user(id)
     when 4, '4', 'select-channel'
+      puts 'What is the channel name or Slack ID?'
+      id = gets.chomp
+      p workspace.select_channel(id)
     when 5, '5', 'details'
 
     when 6, '6', 'quit'
