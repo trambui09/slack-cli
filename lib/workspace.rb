@@ -14,7 +14,9 @@ class Workspace
     user_array = @users.find do |user|
       user.slack_id == id || user.name == id
     end
-    return user_array
+
+    return user_array unless user_array.nil?
+    raise SlackAPIError.new, "user/ID not found"
 
   end
 

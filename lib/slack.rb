@@ -84,8 +84,8 @@ def main
       tp workspace.channels, :slack_id, :name, :topic, :member_count
     when 3, '3', 'select-user'
       puts 'What is the username or Slack ID?'
-      _id = gets.chomp
-      puts workspace.select_user(_id)
+      id = gets.chomp
+      p workspace.select_user(id)
     when 4, '4', 'select-channel'
     when 5, '5', 'details'
 
