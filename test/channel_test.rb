@@ -8,7 +8,7 @@ describe 'Channel' do
     before do
       @channel = Channel.new(
         slack_id: '987654321',
-        name: 'Ada Bot',
+        name: 'random',
         topic: 'kombucha',
         member_count: '42'
       )
