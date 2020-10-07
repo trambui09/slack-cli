@@ -1,8 +1,6 @@
 require_relative 'test_helper'
 require_relative '../lib/recipient'
-# if we use a module, we will have access to everything want - won't
-# need to import/require-relative for each file
-
+#TODO: .get check? any other methods to test here
 
 describe 'Recipient' do
   before do

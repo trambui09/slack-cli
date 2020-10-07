@@ -55,29 +55,46 @@ def main
   puts 'Please select one of the following menu-options by typing the'
   puts 'number or term (e.g., type "1" or "list-user" for option 1).'
   puts '_______________________________________________________________'
-  puts '0. menu-options'
   puts '1. list-user'
   puts '2. list-channel'
-  puts '3. quit'
+  puts '3. select-user'
+  puts '4. select-channel'
+  puts '5. details'
+  puts '6. quit'
   puts '_______________________________________________________________'
 
-  valid = %w[list-user list-channel quit menu-options 0 1 2 3] + (0..3).to_a
+  valid = %w[list-user list-channel select-user select-channel details quit menu 0 1 2 3 4 5 6] +
+    (0..6).to_a
   choice = gets.chomp.downcase
   loop do
     puts 'invalid choice, pick again' unless valid.include?(choice)
     case choice
-    when 0, '0', 'menu-options'
+    when 0, '0', 'menu'
+      puts '_______________________________________________________________'
       puts '1. list-user'
       puts '2. list-channel'
-      puts '3. quit'
+      puts '3. select-user'
+      puts '4. select-channel'
+      puts '5. details'
+      puts '6. quit'
+      puts '_______________________________________________________________'
     when 1, '1', 'list-user'
       tp workspace.users,:name, :slack_id, :real_name
     when 2, '2', 'list-channel'
       tp workspace.channels, :slack_id, :name, :topic, :member_count
-    when 3, '3', 'quit'
+    when 3, '3', 'select-user'
+      puts 'What is the username or Slack ID?'
+      _id = gets.chomp
+      puts workspace.select_user(_id)
+    when 4, '4', 'select-channel'
+    when 5, '5', 'details'
+
+    when 6, '6', 'quit'
       break
     end
+    puts '_______________________________________________________________'
     puts 'What would you like to do next?'
+    puts '(type 0 or menu to see choices again)'
     choice = gets.chomp.downcase
 
   end
