@@ -46,24 +46,22 @@ describe 'Recipient' do
       # VCR.use_cassette('API-fail') do
       #   expect {
       #     Recipient.post(
-      #       'https://slack.com/api/chat.i_have_no_words',
+      #       'https://slack.com/api/chat.postMessage',
       #       headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
       #       body: {
       #         token: ENV['SLACK_TOKEN'],
       #         text: 'testing',
-      #         channel: 'random'}
+      #         channel: 'bogus'}
       #     )
       #   }.must_raise SlackAPIError
       #   end
 
 
         VCR.use_cassette('nominal negative') do
-          exception = expect {
-            Recipient.send_message("testing that I can send text")
+          expect {
+            @recipient.send_message("testing that I can send text")
           }.must_raise SlackAPIError
-
-
-      end
+        end
 
     end
 

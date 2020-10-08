@@ -18,11 +18,12 @@ class Recipient
   end
 
   def send_message(message)
-    response = HTTParty.post(POST_MESSAGE_URL, body: {
-      token: ENV['SLACK_TOKEN'],
-      text: message,
-      channel: @slack_id
-    }
+    response = HTTParty.post(POST_MESSAGE_URL,
+                             headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+                             body:{
+                                    token: ENV['SLACK_TOKEN'],
+                                    text: message,
+                                    channel: @slack_id}
     )
     unless response['ok'] == true
       raise SlackAPIError, "API call failed - #{response['error']}"
