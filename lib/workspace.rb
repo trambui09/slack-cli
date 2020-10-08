@@ -7,6 +7,8 @@ class Workspace
   def initialize
     @users = User.list_all
     @channels = Channel.list_all
+    # we need to utilize this somehow
+    @selected = []
   end
 
   # is is possible for two users to have the same username?
@@ -42,6 +44,8 @@ class Workspace
 
   end
 
+  # the program should print out details for the currently selected recipient.
+  # how do we know who is the current recipient?
   def show_details
 
   end

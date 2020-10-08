@@ -1,5 +1,5 @@
-require 'simplecov'
-SimpleCov.start
+# require 'simplecov'
+# SimpleCov.start
 
 require_relative 'test_helper'
 require_relative '../lib/workspace'
@@ -12,6 +12,10 @@ describe "Workspace" do
     end
   end
   describe "constructor" do
+    it "returns class instances" do
+      expect(@workspace.users).must_be_kind_of Array
+      expect(@workspace.channels).must_be_kind_of Array
+    end
 
   end
 
