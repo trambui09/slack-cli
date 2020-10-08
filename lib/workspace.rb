@@ -1,6 +1,5 @@
 require_relative 'user'
 require_relative 'channel'
-
 class Workspace
 
   attr_reader :users, :channels
@@ -23,13 +22,9 @@ class Workspace
 
     @selected = user_array
 
-    if @selected.nil?
-      return "Sorry no user has that name or ID"
-    else
+    puts "user #{id} not found" if @selected.nil?
 
-      return "#{@selected.name} found! Type 'details' to display " +
-            "user information about #{@selected.real_name}."
-    end
+    return @selected
 
   end
 
@@ -41,19 +36,23 @@ class Workspace
 
     @selected = select_channel
 
-    if @selected.nil?
-      return "Sorry no channel has that name or ID"
-    else
-      return "#{@selected.name} found! Type 'details' to display " +
-          "information about the #{@selected.name} channel."
-    end
+    puts "channel #{id} not found" if @selected.nil?
+
+    return @selected
 
   end
 
   # the program should print out details for the currently selected recipient.
   # how do we know who is the current recipient?
   def show_details
-    @selected.details
+    if @selected.nil?
+      puts 'no recipient currently selected'
+    else
+      return @selected.details
+    end
+  end
 
+  def send_message(message)
+    @selected.send_message(message)
   end
 end

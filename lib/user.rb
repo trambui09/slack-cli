@@ -18,7 +18,8 @@ class User < Recipient
   end
 
   def details
-
+    info = "Slack ID: #{@slack_id}, Name: #{@name}"
+    return info
   end
 
   def self.list_all

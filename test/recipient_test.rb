@@ -26,7 +26,16 @@ describe 'Recipient' do
       end.must_raise NotImplementedError
 
     end
+  end
+  
 
+  describe 'details' do
+    it 'raises an error if invoked directly (without subclassing)' do
+      expect do
+        @recipient.details
+      end.must_raise NotImplementedError
+
+    end
 
   end
 

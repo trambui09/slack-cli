@@ -11,6 +11,8 @@ class Channel < Recipient
   end
 
   def details
+    info = "Slack ID: #{@slack_id}, Name: #{@name}, Member Count: #{@member_count}"
+    return info
   end
 
   def self.list_all

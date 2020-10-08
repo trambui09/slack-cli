@@ -60,11 +60,11 @@ def main
   puts '3. select-user'
   puts '4. select-channel'
   puts '5. details'
-  puts '6. quit'
+  puts '6. send-message'
+  puts '7. quit'
   puts '_______________________________________________________________'
 
-  valid = %w[list-user list-channel select-user select-channel details quit menu 0 1 2 3 4 5 6] +
-    (0..6).to_a
+  valid = %w[list-user list-channel select-user select-channel details quit menu 0 1 2 3 4 5 6 7] + (0..7).to_a
   choice = gets.chomp.downcase
   loop do
     puts 'invalid choice, pick again' unless valid.include?(choice)
@@ -76,7 +76,8 @@ def main
       puts '3. select-user'
       puts '4. select-channel'
       puts '5. details'
-      puts '6. quit'
+      puts '6. send-message'
+      puts '7. quit'
       puts '_______________________________________________________________'
     when 1, '1', 'list-user'
       tp workspace.users,:name, :slack_id, :real_name
@@ -85,19 +86,28 @@ def main
     when 3, '3', 'select-user'
       puts 'What is the username or Slack ID?'
       id = gets.chomp
-      p workspace.select_user(id)
+      unless workspace.select_user(id).nil?
+        puts "type \"5\" or \"details\" to display information about #{id}"
+      end
     when 4, '4', 'select-channel'
       puts 'What is the channel name or Slack ID?'
       id = gets.chomp
-      p workspace.select_channel(id)
+      unless workspace.select_channel(id).nil?
+        puts "type \"5\" or \"details\" to display information about #{id}"
+        puts "type \"6\" or \"send-message\" to send a message to #{id}"
+      end
     when 5, '5', 'details'
-
-    when 6, '6', 'quit'
+      p workspace.show_details
+    when 6, '6', 'send-message'
+        puts "type your message:"
+        message = gets.chomp
+        pp workspace.send_message(message)
+    when 7, '7', 'quit'
       break
     end
     puts '_______________________________________________________________'
     puts 'What would you like to do next?'
-    puts '(type 0 or menu to see choices again)'
+    puts '(type "0" or "menu" to see choices again)'
     choice = gets.chomp.downcase
 
   end
