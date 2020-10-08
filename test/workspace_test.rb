@@ -74,9 +74,32 @@ describe "Workspace" do
 
     it 'if invalid information is passed in @selected is nil' do
       @workspace.select_user('bogus1')
-      @workspace.select_channel('bogus2')
       expect(@workspace.show_details).must_be_nil
+      @workspace.select_channel('bogus2')
       expect(@workspace.show_details).must_be_nil
     end
   end
+
+  describe "send_message method" do
+    it "respond to the method call" do
+      expect(@workspace).must_respond_to :send_message
+    end
+
+    it 'if invalid information is passed in @selected is nil' do
+      @workspace.select_user('bogus1')
+      expect(@workspace.send_message('testing')).must_be_nil
+      @workspace.select_channel('bogus2')
+      expect(@workspace.send_message('testing')).must_be_nil
+    end
+
+    it "displays information for the selected recipient" do
+      VCR.use_cassette("send message nominal positive") do
+        @workspace.select_user("slackbot")
+        expect(@workspace.send_message('testing')).must_equal true
+        @workspace.select_channel("random")
+        expect(@workspace.send_message('testing')).must_equal true
+      end
+    end
+  end
+
 end

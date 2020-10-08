@@ -8,7 +8,7 @@ class Recipient
 
   USER_LIST_URL = 'https://slack.com/api/users.list'
   CHANNEL_LIST_URL = 'https://slack.com/api/conversations.list'
-  MESSAGE_LIST_URL = 'https://slack.com/api/chat.postMessage'
+  POST_MESSAGE_URL = 'https://slack.com/api/chat.postMessage'
 
   attr_reader :slack_id, :name
 
@@ -18,20 +18,27 @@ class Recipient
   end
 
   def send_message(message)
-    response = HTTParty.post(MESSAGE_LIST_URL, body: {
+    response = HTTParty.post(POST_MESSAGE_URL, body: {
       token: ENV['SLACK_TOKEN'],
       text: message,
       channel: @slack_id
     }
     )
+    unless response['ok'] == true
+      raise SlackAPIError, "API call failed - #{response['error']}"
+    end
+
+    return true
+
+    #rescue
   end
 
   def self.get(url, params)
     response = HTTParty.get(url, params)
     unless response['ok'] == true
-      raise SlackAPIError, "API call failed with code #{response.response.code}"
+      raise SlackAPIError, "API call failed - #{response['error']}"
     end
-
+    #rescue
     return response
   end
 

@@ -97,8 +97,11 @@ def main
       p workspace.show_details
     when 6, '6', 'send message'
         puts "type your message:"
-        message = gets.chomp
-        pp workspace.send_message(message)
+        msg = gets.chomp
+        unless workspace.send_message(msg).nil?
+          puts "your message has been sent!"
+        end
+
     when 7, '7', 'quit'
       break
     end

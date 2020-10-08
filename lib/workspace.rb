@@ -52,7 +52,13 @@ class Workspace
     end
   end
 
-  def send_message(message)
-    @selected.send_message(message)
+  def send_message(msg)
+    if @selected.nil?
+      puts "no recipient is currently selected"
+    else
+      #p "checking send_message #{@selected.send_message(msg)}"
+      return @selected.send_message(msg)
+    end
   end
 end
+
