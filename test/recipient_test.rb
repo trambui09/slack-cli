@@ -40,8 +40,21 @@ describe 'Recipient' do
   end
 
   describe "send_message" do
+    before do
+      @valid_recipient = Recipient.new('C01C0H7R9QS', 'random')
+    end
+
+    it "has a send_message method" do
+      expect(@recipient).must_respond_to :send_message
+    end
 
     it 'error when API call fails' do
+
+      VCR.use_cassette('nominal negative') do
+        expect {
+          @recipient.send_message("testing that I can send text")
+        }.must_raise SlackAPIError
+      end
 
       # VCR.use_cassette('API-fail') do
       #   expect {
@@ -56,12 +69,13 @@ describe 'Recipient' do
       #   }.must_raise SlackAPIError
       #   end
 
+    end
 
-        VCR.use_cassette('nominal negative') do
-          expect {
-            @recipient.send_message("testing that I can send text")
-          }.must_raise SlackAPIError
-        end
+    it "sends the message if recipient is valid" do
+
+      VCR.use_cassette('nominal positive') do
+        expect(@valid_recipient.send_message("testing that I can send text")).must_equal true
+      end
 
     end
 
