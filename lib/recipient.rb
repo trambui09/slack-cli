@@ -20,7 +20,7 @@ class Recipient
   def send_message(message)
     response = HTTParty.post(MESSAGE_LIST_URL, body: {
       token: ENV['SLACK_TOKEN'],
-      text: 'message',
+      text: message,
       channel: @slack_id
     }
     )
