@@ -37,7 +37,7 @@ class Workspace
     select_channel = @channels.find do |channel|
       channel.slack_id == id || channel.name == id
     end
-    
+
     select_channel.nil? ? "sorry no channel was found" : select_channel
 
   end
