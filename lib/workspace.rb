@@ -4,11 +4,12 @@ require_relative 'channel'
 class Workspace
 
   attr_reader :users, :channels
+  attr_accessor :selected
   def initialize
     @users = User.list_all
     @channels = Channel.list_all
     # we need to utilize this somehow
-    @selected = []
+    @selected = nil
   end
 
   # is is possible for two users to have the same username?
@@ -20,16 +21,14 @@ class Workspace
       user.slack_id == id || user.name == id
     end
 
-    # return user_array unless user_array.nil?
-    # # should this be SlackApiError?
-    # # if the user_array is nil, raising an SlackApiError seems weird
-    # # means that you can't find the person
-    # raise SlackAPIError.new, "user/ID not found"
+    @selected = user_array
 
-    if user_array.nil?
+    if @selected.nil?
       return "Sorry no user has that name or ID"
     else
-      return user_array
+
+      return "#{@selected.name} found! Type 'details' to display " +
+            "user information about #{@selected.real_name}."
     end
 
   end
@@ -40,14 +39,21 @@ class Workspace
       channel.slack_id == id || channel.name == id
     end
 
-    select_channel.nil? ? "sorry no channel was found" : select_channel
+    @selected = select_channel
+
+    if @selected.nil?
+      return "Sorry no channel has that name or ID"
+    else
+      return "#{@selected.name} found! Type 'details' to display " +
+          "information about the #{@selected.name} channel."
+    end
 
   end
 
   # the program should print out details for the currently selected recipient.
   # how do we know who is the current recipient?
   def show_details
+    @selected.details
 
   end
-
 end

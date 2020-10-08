@@ -18,6 +18,7 @@ class User < Recipient
   end
 
   def details
+
   end
 
   def self.list_all
