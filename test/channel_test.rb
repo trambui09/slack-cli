@@ -52,7 +52,7 @@ describe 'Channel' do
         @channels = Channel.list_all
 
         expect(@channels.length).must_equal response.length
-        
+
         # can't test if first channel matched because we are connected
         # to different workspaces, so we don't know which channel would
         # be first in both of our workspaces
