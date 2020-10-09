@@ -126,4 +126,70 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"ok":true,"channel":"C01C0H7R9QS","ts":"1602181799.000500","message":{"bot_id":"B01CGA5L49X","type":"message","text":"testing","user":"U01C0H7QZRQ","ts":"1602181799.000500","team":"T01BXELVD8D","bot_profile":{"id":"B01CGA5L49X","deleted":false,"name":"BottyBot","updated":1602042689,"app_id":"A01CTGE0H9N","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BXELVD8D"}}}'
   recorded_at: Thu, 08 Oct 2020 18:29:59 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=<SLACK_TOKEN>&text=testing&channel=USLACKBOT
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Oct 2020 02:07:08 GMT
+      Server:
+      - Apache
+      X-Slack-Req-Id:
+      - d3c6bc9898c24a3869fa5fd277d6c94f
+      X-Oauth-Scopes:
+      - chat:write,users:read,channels:read
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Slack-Backend:
+      - r
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - chat:write
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Content-Length:
+      - '334'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Via:
+      - haproxy-www-g9kt,haproxy-edge-pdx-tfuw
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"channel":"D01C6PHB4EQ","ts":"1602209228.000100","message":{"bot_id":"B01BXF8APN1","type":"message","text":"testing","user":"U01C0HV6BQA","ts":"1602209228.000100","team":"T016J51T03T","bot_profile":{"id":"B01BXF8APN1","deleted":false,"name":"Fire
+        - Aimee - API Project","updated":1601943130,"app_id":"A01BTRG592S","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T016J51T03T"}}}'
+  recorded_at: Fri, 09 Oct 2020 02:07:08 GMT
 recorded_with: VCR 6.0.0

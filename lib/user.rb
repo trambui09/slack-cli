@@ -1,5 +1,3 @@
-#module Slack
-
 require_relative 'recipient'
 require 'dotenv'
 require 'httparty'
@@ -18,33 +16,32 @@ class User < Recipient
   end
 
   def details
-    info = "Slack ID: #{@slack_id}, Name: #{@name}"
+    info = "Slack ID: #{@slack_id} \nName: #{@name}"
     return info
   end
 
   def self.list_all
-    # build and send the request
 
-    #token = ENV['SLACK_TOKEN']
+    begin
+      response = get(USER_LIST_URL, query: { token: ENV['SLACK_TOKEN'] })
 
-    # response = HTTParty.get(USER_LIST_URL, query: {token: ENV['SLACK_TOKEN']})
-
-    response = get(USER_LIST_URL, query: { token: ENV['SLACK_TOKEN'] })
-
-    users = response['members'].map do |user|
-      new(
+      users = response['members'].map do |user|
+        new(
         slack_id: user['id'],
         name: user['name'],
         real_name: user['real_name'],
         status_text: user['status_text'],
         status_emoji: user['status_emoji']
-      )
+        )
+      end
+
+      return users
+
+    rescue SlackAPIError => exception
+      puts '🔥👾👾🔥👾🔥👾👾🔥👾🔥👾👾🔥👾👾🔥👾👾🔥👾👾🔥👾👾🔥'
+      puts "Encountered an error: #{exception}"
+      puts '🔥👾👾🔥👾🔥👾👾🔥👾🔥👾👾🔥👾👾🔥👾👾🔥👾👾🔥👾👾🔥'
     end
 
-    return users
-
-
-
   end
-
 end

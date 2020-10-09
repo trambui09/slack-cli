@@ -1,8 +1,7 @@
 require_relative 'test_helper'
 require_relative '../lib/channel'
 require_relative '../lib/recipient'
-# https://api.slack.com/methods/conversations.list
-# Any tests involving a `Channel` should use the `#random` channel
+
 describe 'Channel' do
   describe 'create instance of Channel for tests' do
     before do
@@ -25,12 +24,10 @@ describe 'Channel' do
         expect(@channel.topic).must_be_kind_of String
         expect(@channel.member_count).must_be_kind_of String
       end
-
     end
   end
 
   describe 'get' do
-
     it 'lists channels' do
       VCR.use_cassette('channels-list') do
         response = Channel.get(
@@ -45,9 +42,7 @@ describe 'Channel' do
       end
     end
 
-
     it 'error when API call fails' do
-
       VCR.use_cassette('API-fail') do
         expect do
           Channel.get(
@@ -59,6 +54,13 @@ describe 'Channel' do
       end
     end
 
-  end
+    describe 'list_all' do
+      it "rescues the error - doesn't throw an error" do
+        VCR.use_cassette('rescue-channel-error') do
+          expect(Channel.list_all).must_be_nil
+        end
 
+      end
+    end
+  end
 end

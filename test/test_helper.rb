@@ -9,18 +9,12 @@ require 'minitest/reporters'
 require 'minitest/skip_dsl'
 require 'vcr'
 require 'dotenv'
-#require 'webmock/minitest'
-Dotenv.load
+require 'webmock/minitest'
 
-# require_relative '../lib/location_search'
+Dotenv.load
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
-# we can delete this block because its a repeat of the block below
-# VCR.configure do |config|
-#   config.cassette_library_dir = "test/cassettes"
-#   config.hook_into :webmock
-# end
 
 VCR.configure do |config|
   config.cassette_library_dir = "test/cassettes" # folder where casettes will be located
@@ -36,6 +30,3 @@ VCR.configure do |config|
   end
 
 end
-
-# do we need to add VCR.use_cassette method here? or make another file to wrap our API code in?
-# just call it?

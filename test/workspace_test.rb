@@ -1,9 +1,5 @@
-# require 'simplecov'
-# SimpleCov.start
-
 require_relative 'test_helper'
 require_relative '../lib/workspace'
-
 
 describe "Workspace" do
   before do
@@ -13,12 +9,12 @@ describe "Workspace" do
       @channel_test = @workspace.select_channel("random")
     end
   end
+
   describe "constructor" do
     it "returns class instances" do
       expect(@workspace.users).must_be_kind_of Array
       expect(@workspace.channels).must_be_kind_of Array
     end
-
   end
 
   describe "select_user method" do
@@ -28,10 +24,8 @@ describe "Workspace" do
 
     it "returns the correct user instance" do
       expect(@workspace.select_user('slackbot')).must_be_kind_of User
-      # how can we test if it's returning the right instance of User?
-      # expect(@workspace.select_user('pbui17')).must_equal @workspace.users.name
 
-      selected_user = @workspace.select_user('pbui17')
+      @workspace.select_user('pbui17')
       expect(@workspace.selected.slack_id).must_equal 'U01C0H7QZRQ'
 
     end
@@ -39,7 +33,6 @@ describe "Workspace" do
     it "returns nil if selected user doesn't exist" do
       expect(@workspace.select_user('bogus')).must_be_nil
     end
-
   end
 
   describe "select_channel" do
@@ -100,6 +93,15 @@ describe "Workspace" do
         expect(@workspace.send_message('testing')).must_equal true
       end
     end
-  end
 
+    it 'rescues error' do
+      VCR.use_cassette("send-message-rescue") do
+        @workspace.select_user("slackbot")
+        expect(@workspace.send_message('testing')).must_be_nil
+        @workspace.select_channel("random")
+        expect(@workspace.send_message('testing')).must_be_nil
+      end
+
+    end
+  end
 end
