@@ -22,6 +22,12 @@ describe 'User class ' do
       expect(@user).must_be_kind_of User
     end
 
+    it "responds to the attr_reader" do
+      [:slack_id, :name, :real_name, :status_text, :status_emoji].each do |prop|
+        expect(@user).must_respond_to prop
+      end
+    end
+
     it 'check attribute data types' do
       expect(@user.name).must_be_kind_of String
       expect(@user.name).must_equal 'slackbot'

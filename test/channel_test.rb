@@ -21,6 +21,12 @@ describe 'Channel' do
       expect(@channel).must_be_kind_of Channel
     end
 
+    it "respons to the attr_reader" do
+      [:slack_id, :name, :topic, :member_count].each do |prop|
+        expect(@channel).must_respond_to prop
+      end
+    end
+
     it 'check attribute data types' do
       expect(@channel.name).must_be_kind_of String
       expect(@channel.name).must_equal 'random'
