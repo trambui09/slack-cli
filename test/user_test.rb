@@ -54,6 +54,15 @@ describe 'User class ' do
         expect(response['ok']).must_equal true
         expect(response.code).must_equal 200
 
+        @users = User.list_all
+
+        expect(@users.length).must_equal response.length
+
+        # the first user is matched
+        expect(response['members'].first['id']).must_equal @users.first.slack_id
+        expect(response['members'].first['name']).must_equal @users.first.name
+        expect(response['members'].first['real_name']).must_equal @users.first.real_name
+
       end
     end
 

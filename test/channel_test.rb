@@ -48,6 +48,15 @@ describe 'Channel' do
         expect(response['channels']).must_be_kind_of Array
         expect(response['ok']).must_equal true
         expect(response.code).must_equal 200
+
+        @channels = Channel.list_all
+
+        expect(@channels.length).must_equal response.length
+        
+        # can't test if first channel matched because we are connected
+        # to different workspaces, so we don't know which channel would
+        # be first in both of our workspaces
+
       end
     end
 
