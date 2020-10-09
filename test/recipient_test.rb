@@ -21,14 +21,6 @@ describe 'Recipient' do
   end
 
   describe "self.get" do
-    # before do
-    #   VCR.use_cassette('recipient-get') do
-    #     @query = {token: ENV['SLACK_TOKEN']}
-    #     url = 'https://slack.com/api/conversations.list'
-    #     @response = Recipient.get(url, @query)
-    #   end
-    # end
-
     it " returns a response" do
       VCR.use_cassette('recipient-get') do
         query = {token: ENV['SLACK_TOKEN']}
