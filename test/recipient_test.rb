@@ -13,9 +13,46 @@ describe 'Recipient' do
 
     it 'check attribute data types' do
       expect(@recipient.name).must_be_kind_of String
+      expect(@recipient.name).must_equal "test person"
       expect(@recipient.slack_id).must_be_kind_of String
+      expect(@recipient.slack_id).must_equal "987654321"
     end
 
+  end
+
+  describe "self.get" do
+    # before do
+    #   VCR.use_cassette('recipient-get') do
+    #     @query = {token: ENV['SLACK_TOKEN']}
+    #     url = 'https://slack.com/api/conversations.list'
+    #     @response = Recipient.get(url, @query)
+    #   end
+    # end
+
+    it " returns a response" do
+      VCR.use_cassette('recipient-get') do
+        query = {token: ENV['SLACK_TOKEN']}
+        url = 'https://slack.com/api/conversations.list'
+        response = Recipient.get(url, query: query)
+
+        expect(response['ok']).must_equal true
+      end
+    end
+
+    it "raises a SlackApiError when paramater input is invalid " do
+      VCR.use_cassette('recipient-get') do
+        query2 = {token: ENV['SLACK_TOKEN']}
+        url_bogus = 'https://slack.com/api/bogus'
+
+        expect {
+          Recipient.get(url_bogus, query: query2)
+        }.must_raise SlackAPIError
+
+        expect {
+          Recipient.get(url_bogus, query: {token: ENV['BOGUS']})
+        }.must_raise SlackAPIError
+      end
+    end
   end
 
   describe 'list_all' do
