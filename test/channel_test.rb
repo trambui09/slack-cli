@@ -8,7 +8,7 @@ describe 'Channel' do
         slack_id: 'C01C0H7R9QS',
         name: 'random',
         topic: 'kombucha',
-        member_count: '3'
+        member_count: 3
     )
 
     VCR.use_cassette('list channels') do
@@ -20,6 +20,8 @@ describe 'Channel' do
     it 'creates instance of Channel' do
       expect(@channel).must_be_kind_of Channel
     end
+
+
 
     it "respons to the attr_reader" do
       [:slack_id, :name, :topic, :member_count].each do |prop|
@@ -33,7 +35,7 @@ describe 'Channel' do
       expect(@channel.slack_id).must_be_kind_of String
       expect(@channel.slack_id).must_equal 'C01C0H7R9QS'
       expect(@channel.topic).must_be_kind_of String
-      expect(@channel.member_count).must_be_kind_of String
+      expect(@channel.member_count).must_be_kind_of Integer
     end
   end
 
@@ -64,6 +66,16 @@ describe 'Channel' do
         # be first in both of our workspaces
 
       end
+    end
+
+    it "returns each channel in the array should be an instance of channel" do
+      @response.each do |channel|
+        expect(channel).must_be_kind_of Channel
+      end
+    end
+
+    it "must have at least 1 channel" do
+      expect(@response.length).must_be :>,0
     end
 
     it 'error when API call fails' do

@@ -72,6 +72,16 @@ describe 'User class ' do
       end
     end
 
+    it "must return an array of users with User instance" do
+      @response.each do |user|
+        expect(user).must_be_kind_of User
+      end
+    end
+
+    it "must have at least 1 user" do
+      expect(@response.length).must_be :>,0
+    end
+
     it 'error when API call fails' do
       VCR.use_cassette('API-fail') do
         expect {
