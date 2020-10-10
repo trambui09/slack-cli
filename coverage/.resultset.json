@@ -1,51 +1,7 @@
 {
   "Minitest": {
     "coverage": {
-      "/Users/ada/Developer/6-exercises/slack-cli/lib/channel.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          null,
-          1,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/ada/Developer/6-exercises/slack-cli/lib/recipient.rb": {
+      "/Users/TramBui/ada/api/slack-cli/lib/recipient.rb": {
         "lines": [
           1,
           1,
@@ -63,8 +19,16 @@
           1,
           null,
           1,
-          0,
-          0,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
           null,
           null,
           1,
@@ -86,9 +50,9 @@
           null,
           null,
           1,
-          1,
-          1,
-          1,
+          0,
+          0,
+          0,
           null,
           null,
           0,
@@ -106,7 +70,7 @@
         ]
       }
     },
-    "timestamp": 1602215867
+    "timestamp": 1602289051
   },
   "Unit Tests": {
     "coverage": {
@@ -172,8 +136,13 @@
           1,
           null,
           1,
-          180,
-          180,
+          185,
+          185,
+          null,
+          null,
+          null,
+          185,
+          null,
           null,
           null,
           1,
@@ -195,12 +164,12 @@
           null,
           null,
           1,
-          53,
-          53,
+          54,
+          54,
           6,
           null,
           null,
-          47,
+          48,
           null,
           null,
           1,
@@ -336,6 +305,6 @@
         ]
       }
     },
-    "timestamp": 1602268093
+    "timestamp": 1602289634
   }
 }

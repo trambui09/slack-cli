@@ -16,6 +16,9 @@ class Recipient
   def initialize(slack_id, name)
     @slack_id = slack_id
     @name = name
+    
+    raise ArgumentError,'Input cannot be empty' if name.empty? || slack_id.empty?
+
   end
 
   def send_message(message)

@@ -18,6 +18,24 @@ describe 'Recipient' do
       expect(@recipient.slack_id).must_equal "987654321"
     end
 
+    it "must respond to its attr_reader" do
+      expect(@recipient).must_respond_to :slack_id
+      expect(@recipient).must_respond_to :name
+    end
+
+    it "raises an error if slack_id or name is nil" do
+      # slack_id is empty
+      expect {
+        Recipient.new("", "slackbot")
+      }.must_raise ArgumentError
+
+      # name is empty
+      expect {
+        Recipient.new("987654321", "")
+      }.must_raise ArgumentError
+
+    end
+
   end
 
   describe "self.get" do
@@ -31,8 +49,18 @@ describe 'Recipient' do
       end
     end
 
-    it "raises a SlackApiError when paramater input is invalid " do
+    it "must be an instance of HTTParty " do
       VCR.use_cassette('recipient-get') do
+        query = {token: ENV['SLACK_TOKEN']}
+        url = 'https://slack.com/api/conversations.list'
+        response = Recipient.get(url, query: query)
+
+        expect(response).must_be_kind_of HTTParty::Response
+        end
+    end
+
+    it "raises a SlackApiError when paramater input is invalid " do
+      VCR.use_cassette('recipient-get negative') do
         query2 = {token: ENV['SLACK_TOKEN']}
         url_bogus = 'https://slack.com/api/bogus'
 
